@@ -158,8 +158,8 @@ export default function AsciiTorus() {
     };
 
     const onDown = (e: PointerEvent) => {
-      // The object can't be held while it is collapsing or re-forming.
-      if (dragId !== null || phase !== 'normal') return;
+      // The object can't be held while it is collapsing or re-forming, and links aren't drag handles.
+      if (dragId !== null || phase !== 'normal' || (e.target as Element).closest('a')) return;
       dragId = e.pointerId;
       downX = lastX = e.clientX;
       downY = lastY = e.clientY;

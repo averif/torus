@@ -16,3 +16,19 @@ body,
   align-items: center;
   justify-content: center;
 }
+
+.credit {
+  position: fixed;
+  right: 16px;
+  bottom: 12px;
+  color: #fff;
+  opacity: 0.55;
+  font: 12px Consolas, "SF Mono", Menlo, "DejaVu Sans Mono", "Liberation Mono", monospace;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.credit:hover,
+.credit:focus-visible {
+  opacity: 1;
+}
