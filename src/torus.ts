@@ -1,16 +1,26 @@
-// ASCII torus renderer: a solid of revolution with a rounded-rectangle
-// (superellipse) cross-section, giving the thick, flat band from the reference.
+// ASCII torus renderer: a solid of revolution with a superellipse
+// cross-section. Exponent 2 with equal half-sizes gives a round donut.
 
 /** Distance from the ring's axis to the centre of the cross-section. */
 const RING_RADIUS = 1;
 /** Half-width of the cross-section along the radius. */
-const HALF_WIDTH = 0.26;
+const HALF_WIDTH = 0.4;
 /** Half-height of the cross-section along the ring's axis. */
-const HALF_HEIGHT = 0.21;
+const HALF_HEIGHT = 0.4;
 /** Superellipse exponent: 2 = ellipse, larger = boxier. */
-const EXPONENT = 5;
+const EXPONENT = 2;
 /** Furthest any surface point gets from the origin (used to fit the screen). */
-export const MAX_EXTENT = Math.hypot(RING_RADIUS + HALF_WIDTH, HALF_HEIGHT);
+export const MAX_EXTENT = (() => {
+  let max = 0;
+  for (let i = 0; i < 360; i++) {
+    const t = (i / 360) * Math.PI * 2;
+    const c = Math.cos(t), s = Math.sin(t);
+    const u = HALF_WIDTH * Math.sign(c) * Math.abs(c) ** (2 / EXPONENT);
+    const v = HALF_HEIGHT * Math.sign(s) * Math.abs(s) ** (2 / EXPONENT);
+    max = Math.max(max, Math.hypot(RING_RADIUS + u, v));
+  }
+  return max;
+})();
 /** Camera distance from the origin, in model units. */
 export const CAMERA_DISTANCE = 7;
 

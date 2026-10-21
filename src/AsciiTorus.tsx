@@ -20,7 +20,7 @@ const FONT_FAMILY = 'Consolas, "SF Mono", Menlo, "DejaVu Sans Mono", "Liberation
 const SPEED_A = 0.75;
 const SPEED_B = 0.42;
 /** Starting tilt so the first frame shows the ring from slightly above. */
-const START_A = -0.65;
+const START_A = -0.85;
 /** Fraction of the shorter viewport side the torus may span. */
 const FIT = 0.92;
 /** Surface samples per character cell along each direction. */
@@ -139,7 +139,8 @@ export default function AsciiTorus() {
 
       const cell = Math.min(charW, charH) / SAMPLES_PER_CELL;
       const ringSteps = Math.ceil((2 * Math.PI * fitPx) / cell);
-      const sectionSteps = Math.ceil((fitPx * 1.5) / cell);
+      // The round tube's circumference is about twice fitPx on screen.
+      const sectionSteps = Math.ceil((fitPx * 2.2) / cell);
       mesh = buildMesh(ringSteps, sectionSteps);
     };
 
